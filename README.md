@@ -55,6 +55,11 @@ If you are passionate about iOS and kernel exploitation and want to help us push
   - Enable KVM support.
   - Support getting TFP0 in usermode applications.
   
+|  SUPP  | 12.0  | 12.1 | 12.2 |
+|--------|-------|:----:|-----:|
+| **6**  |       |      |      |
+| **6s** |       |  ✅  |      |
+| **7**  |       |      |      |
 
 [Running iOS in QEMU to an interactive bash shell (1)]: https://alephsecurity.com/2019/06/17/xnu-qemu-arm64-1/
 [Running iOS in QEMU to an interactive bash shell (2)]: https://alephsecurity.com/2019/06/25/xnu-qemu-arm64-2/
