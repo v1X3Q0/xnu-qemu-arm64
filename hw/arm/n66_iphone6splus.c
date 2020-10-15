@@ -350,7 +350,6 @@ static void n66_ns_memory_setup(MachineState *machine, MemoryRegion *sysmem,
                    &dtb_size, nms->ramdisk_file_dev.pa,
                    ramdisk_size, nms->tc_file_dev.pa,
                    nms->tc_file_dev.size, &nms->uart_mmio_pa);
-                   ramdisk_size, &nms->uart_mmio_pa);
     dtb_va = ptov_static(phys_ptr);
     phys_ptr += align_64k_high(dtb_size);
     used_ram_for_blobs += align_64k_high(dtb_size);
