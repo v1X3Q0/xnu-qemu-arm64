@@ -48,18 +48,54 @@
 #define CMP_X9_x9_INST (0xeb09013f)
 //compiled  instruction: mov w7, #0
 #define W7_ZERO_INST (0x52800007)
+#define W6_ZERO_INST (0x52800006)
 
+// ios 12.1-12.2
 #define INITIAL_BRANCH_VADDR_16B92 (0xfffffff0070a5098)
+// ios 12.1-12.2
 #define BZERO_COND_BRANCH_VADDR_16B92 (0xfffffff0070996d8)
+// ios 12.1-12.2
 #define SMC_INST_VADDR_16B92 (0xfffffff0070a7d3c)
+
+// ios 12.1
 #define SLIDE_SET_INST_VADDR_16B92 (0xfffffff00748ef30)
+// ios 12.2
+// #define SLIDE_SET_INST_VADDR_16B92 (0xFFFFFFF00748B540)
+
+// ios 12.1
 #define NOTIFY_KERNEL_TASK_PTR_16B92 (0xfffffff0070f4d90)
+// ios 12.2
+// #define NOTIFY_KERNEL_TASK_PTR_16B92 (0xFFFFFFF0070F4FB8)
+
+// ios 12.1
 #define CORE_TRUST_CHECK_16B92 (0xfffffff0061e136c)
+// ios 12.2
+// #define CORE_TRUST_CHECK_16B92 (0xFFFFFFF0061D6340)
+
+// ios 12.1
 #define TFP0_TASK_FOR_PID_16B92 (0xfffffff0074a27bc)
+// ios 12.2
+// #define TFP0_TASK_FOR_PID_16B92 (0xFFFFFFF00749FB78)
+
+// ios 12.1
 #define TFP0_CNVRT_PORT_TO_TASK_16B92 (0xfffffff0070d7cb8)
+// ios 12.2 ? not found
+// #define TFP0_CNVRT_PORT_TO_TASK_16B92 (0xfffffff0070d7cb8)
+
+// ios 12.1
 #define TFP0_PORT_NAME_TO_TASK_16B92 (0xfffffff0070d82d8)
+// ios 12.2 ? not found
+// #define TFP0_PORT_NAME_TO_TASK_16B92 (0xfffffff0070d82d8)
+
+// ios 12.1
 #define TFP0_KERNEL_TASK_CMP_1_16B92 (0xfffffff0070d7b04)
+// ios 12.2 ? not found
+// #define TFP0_KERNEL_TASK_CMP_1_16B92 (0xfffffff0070d7b04)
+
+// ios 12.1
 #define TFP0_KERNEL_TASK_CMP_2_16B92 (0xfffffff0070d810c)
+// ios 12.2 ? not found
+// #define TFP0_KERNEL_TASK_CMP_2_16B92 (0xfffffff0070d810c)
 
 //hook the kernel to execute our "driver" code in this function
 //after things are already running in the kernel but the root mount is not
@@ -175,7 +211,7 @@ static const ARMCPRegInfo n66_cp_reginfo_tcg[] = {
 static uint32_t g_nop_inst = NOP_INST;
 static uint32_t g_mov_w0_01_inst = MOV_W0_01_INST;
 static uint32_t g_compare_true_inst = CMP_X9_x9_INST;
-static uint32_t g_w7_zero_inst = W7_ZERO_INST;
+static uint32_t g_wX_zero_inst = W6_ZERO_INST;
 static uint32_t g_set_cpacr_and_branch_inst[] = {
     //  91400c21       add x1, x1, 3, lsl 12    # x1 = x1 + 0x3000
     //  d378dc21       lsl x1, x1, 8            # x1 = x1 * 0x100 (x1 = 0x300000)
@@ -251,8 +287,8 @@ static void n66_patch_kernel(AddressSpace *nsas)
     //patch the slide set instruction when creating a new process
     //in parse_machfile() in order to disable aslr for user mode apps
     address_space_rw(nsas, vtop_static(SLIDE_SET_INST_VADDR_16B92),
-                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_w7_zero_inst,
-                     sizeof(g_w7_zero_inst), 1);
+                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_wX_zero_inst,
+                     sizeof(g_wX_zero_inst), 1);
 
     //patch the instruction that writes the kernel task port pointer
     //in task_create_internal so we can catch it without MMIO
@@ -262,18 +298,18 @@ static void n66_patch_kernel(AddressSpace *nsas)
     address_space_rw(nsas, vtop_static(TFP0_TASK_FOR_PID_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_nop_inst,
                      sizeof(g_nop_inst), 1);
-    address_space_rw(nsas, vtop_static(TFP0_CNVRT_PORT_TO_TASK_16B92),
-                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-                     sizeof(g_compare_true_inst), 1);
-    address_space_rw(nsas, vtop_static(TFP0_PORT_NAME_TO_TASK_16B92),
-                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-                     sizeof(g_compare_true_inst), 1);
-    address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_1_16B92),
-                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-                     sizeof(g_compare_true_inst), 1);
-    address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_2_16B92),
-                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-                     sizeof(g_compare_true_inst), 1);
+    // address_space_rw(nsas, vtop_static(TFP0_CNVRT_PORT_TO_TASK_16B92),
+    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+    //                  sizeof(g_compare_true_inst), 1);
+    // address_space_rw(nsas, vtop_static(TFP0_PORT_NAME_TO_TASK_16B92),
+    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+    //                  sizeof(g_compare_true_inst), 1);
+    // address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_1_16B92),
+    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+    //                  sizeof(g_compare_true_inst), 1);
+    // address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_2_16B92),
+    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+    //                  sizeof(g_compare_true_inst), 1);
     address_space_rw(nsas, vtop_static(CORE_TRUST_CHECK_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_mov_w0_01_inst,
                      sizeof(g_mov_w0_01_inst), 1);
