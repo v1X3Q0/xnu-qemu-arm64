@@ -51,51 +51,55 @@
 #define W6_ZERO_INST (0x52800006)
 
 // ios 12.1-12.2
+
+#if defined (IOS_12_1) || defined(IOS_12_2)
+// gonna do a branch to an address, seems to be the same for builds
 #define INITIAL_BRANCH_VADDR_16B92 (0xfffffff0070a5098)
-// ios 12.1-12.2
 #define BZERO_COND_BRANCH_VADDR_16B92 (0xfffffff0070996d8)
-// ios 12.1-12.2
 #define SMC_INST_VADDR_16B92 (0xfffffff0070a7d3c)
+#endif
 
-// ios 12.1
+#if defined (IOS_12_1)
+// ios 12.1 w7
 #define SLIDE_SET_INST_VADDR_16B92 (0xfffffff00748ef30)
-// ios 12.2
-// #define SLIDE_SET_INST_VADDR_16B92 (0xFFFFFFF00748B540)
-
-// ios 12.1
 #define NOTIFY_KERNEL_TASK_PTR_16B92 (0xfffffff0070f4d90)
-// ios 12.2
-// #define NOTIFY_KERNEL_TASK_PTR_16B92 (0xFFFFFFF0070F4FB8)
-
-// ios 12.1
+// gonna just move into w0 1
 #define CORE_TRUST_CHECK_16B92 (0xfffffff0061e136c)
-// ios 12.2
-// #define CORE_TRUST_CHECK_16B92 (0xFFFFFFF0061D6340)
-
-// ios 12.1
 #define TFP0_TASK_FOR_PID_16B92 (0xfffffff0074a27bc)
-// ios 12.2
-// #define TFP0_TASK_FOR_PID_16B92 (0xFFFFFFF00749FB78)
-
-// ios 12.1
 #define TFP0_CNVRT_PORT_TO_TASK_16B92 (0xfffffff0070d7cb8)
-// ios 12.2 ? not found
-// #define TFP0_CNVRT_PORT_TO_TASK_16B92 (0xfffffff0070d7cb8)
-
-// ios 12.1
 #define TFP0_PORT_NAME_TO_TASK_16B92 (0xfffffff0070d82d8)
-// ios 12.2 ? not found
-// #define TFP0_PORT_NAME_TO_TASK_16B92 (0xfffffff0070d82d8)
-
-// ios 12.1
 #define TFP0_KERNEL_TASK_CMP_1_16B92 (0xfffffff0070d7b04)
-// ios 12.2 ? not found
-// #define TFP0_KERNEL_TASK_CMP_1_16B92 (0xfffffff0070d7b04)
-
-// ios 12.1
 #define TFP0_KERNEL_TASK_CMP_2_16B92 (0xfffffff0070d810c)
-// ios 12.2 ? not found
-// #define TFP0_KERNEL_TASK_CMP_2_16B92 (0xfffffff0070d810c)
+#endif
+
+#if defined (IOS_12_2)
+// ios 12.2 w6
+#define SLIDE_SET_INST_VADDR_16B92 (0xFFFFFFF00748B540)
+// ios 12.2 : this one doesn't seem to work, but isn't needed
+// #define NOTIFY_KERNEL_TASK_PTR_16B92 (0xFFFFFFF0070F4FB8)
+#define CORE_TRUST_CHECK_16B92 (0xFFFFFFF0061D6340)
+#define TFP0_TASK_FOR_PID_16B92 (0xFFFFFFF00749FB78)
+#endif
+
+// ios 13.3
+#if defined (IOS_13_3)
+#define INITIAL_BRANCH_VADDR_16B92 (0xFFFFFFF0070C1488)
+#define SMC_INST_VADDR_16B92 (0xFFFFFFF0070C3C50)
+// ios 13.3 w7
+#define SLIDE_SET_INST_VADDR_16B92 (0xFFFFFFF0075332C8)
+#define BZERO_COND_BRANCH_VADDR_16B92 (0xFFFFFFF0070B56D8)
+#define CORE_TRUST_CHECK_16B92 (0xFFFFFFF006081C34)
+// ios 13.3 not sure yet
+#define TFP0_TASK_FOR_PID_16B92 (0xFFFFFFF00754776C)
+#endif
+
+#if defined (IOS_14_0)
+#define INITIAL_BRANCH_VADDR_16B92 (0xFFFFFFF0070FD488)
+#define SMC_INST_VADDR_16B92 (0xFFFFFFF0070FFD10)
+
+#define BZERO_COND_BRANCH_VADDR_16B92 (0xFFFFFFF0070F09B8)
+#define CORE_TRUST_CHECK_16B92 (0xFFFFFFF005E8CDA8)
+#endif
 
 //hook the kernel to execute our "driver" code in this function
 //after things are already running in the kernel but the root mount is not
@@ -211,14 +215,23 @@ static const ARMCPRegInfo n66_cp_reginfo_tcg[] = {
 static uint32_t g_nop_inst = NOP_INST;
 static uint32_t g_mov_w0_01_inst = MOV_W0_01_INST;
 static uint32_t g_compare_true_inst = CMP_X9_x9_INST;
+#if defined (IOS_12_1) || defined (IOS_13_3)
+static uint32_t g_wX_zero_inst = W7_ZERO_INST;
+#elif defined (IOS_12_2)
 static uint32_t g_wX_zero_inst = W6_ZERO_INST;
+#endif
 static uint32_t g_set_cpacr_and_branch_inst[] = {
     //  91400c21       add x1, x1, 3, lsl 12    # x1 = x1 + 0x3000
     //  d378dc21       lsl x1, x1, 8            # x1 = x1 * 0x100 (x1 = 0x300000)
     //  d5181041       msr cpacr_el1, x1        # cpacr_el1 = x1 (enable FP)
     //  aa1f03e1       mov x1, xzr              # x1 = 0
     //  140007ec       b 0x1fc0                 # branch to regular start
-    0x91400c21, 0xd378dc21, 0xd5181041, 0xaa1f03e1, 0x140007ec
+    0x91400c21, 0xd378dc21, 0xd5181041, 0xaa1f03e1,
+#if defined (IOS_12_1) || defined (IOS_12_2)
+    0x140007ec
+#elif defined (IOS_13_3) || defined (IOS_14_0)
+    0x140006f0
+#endif
 };
 static uint32_t g_bzero_branch_unconditionally_inst = 0x14000039;
 static uint32_t g_qemu_call = 0xd51bff1f;
@@ -286,30 +299,41 @@ static void n66_patch_kernel(AddressSpace *nsas)
 
     //patch the slide set instruction when creating a new process
     //in parse_machfile() in order to disable aslr for user mode apps
+#if defined (IOS_12_1) || defined (IOS_12_2) || defined (IOS_13_3)
     address_space_rw(nsas, vtop_static(SLIDE_SET_INST_VADDR_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_wX_zero_inst,
                      sizeof(g_wX_zero_inst), 1);
+#endif
 
     //patch the instruction that writes the kernel task port pointer
     //in task_create_internal so we can catch it without MMIO
+#if defined (IOS_12_1)
     address_space_rw(nsas, vtop_static(NOTIFY_KERNEL_TASK_PTR_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_qemu_call,
                      sizeof(g_qemu_call), 1);
+#endif
+
+#if defined (IOS_12_1) || defined (IOS_12_2) || defined (IOS_13_3)
     address_space_rw(nsas, vtop_static(TFP0_TASK_FOR_PID_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_nop_inst,
                      sizeof(g_nop_inst), 1);
-    // address_space_rw(nsas, vtop_static(TFP0_CNVRT_PORT_TO_TASK_16B92),
-    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-    //                  sizeof(g_compare_true_inst), 1);
-    // address_space_rw(nsas, vtop_static(TFP0_PORT_NAME_TO_TASK_16B92),
-    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-    //                  sizeof(g_compare_true_inst), 1);
-    // address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_1_16B92),
-    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-    //                  sizeof(g_compare_true_inst), 1);
-    // address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_2_16B92),
-    //                  MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
-    //                  sizeof(g_compare_true_inst), 1);
+#endif
+
+#if defined (IOS_12_1)
+    address_space_rw(nsas, vtop_static(TFP0_CNVRT_PORT_TO_TASK_16B92),
+                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+                     sizeof(g_compare_true_inst), 1);
+    address_space_rw(nsas, vtop_static(TFP0_PORT_NAME_TO_TASK_16B92),
+                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+                     sizeof(g_compare_true_inst), 1);
+    address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_1_16B92),
+                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+                     sizeof(g_compare_true_inst), 1);
+    address_space_rw(nsas, vtop_static(TFP0_KERNEL_TASK_CMP_2_16B92),
+                     MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_compare_true_inst,
+                     sizeof(g_compare_true_inst), 1);
+#endif
+
     address_space_rw(nsas, vtop_static(CORE_TRUST_CHECK_16B92),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&g_mov_w0_01_inst,
                      sizeof(g_mov_w0_01_inst), 1);
