@@ -17,59 +17,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.4\n"
 
-msgid " - Press Ctrl+Alt+G to release grab"
-msgstr " - 按下 Ctrl+Alt+G 取消捕获"
+#~ msgid " - Press Ctrl+Alt+G to release grab"
+#~ msgstr " - 按下 Ctrl+Alt+G 取消捕获"
 
-msgid " [Paused]"
-msgstr " [已暂停]"
+#~ msgid " [Paused]"
+#~ msgstr " [已暂停]"
 
-msgid "_Pause"
-msgstr "暂停(_P)"
+#~ msgid "_Pause"
+#~ msgstr "暂停(_P)"
 
-msgid "_Reset"
-msgstr "重置(_R)"
+#~ msgid "_Reset"
+#~ msgstr "重置(_R)"
 
-msgid "Power _Down"
-msgstr "关闭电源(_D)"
+#~ msgid "Power _Down"
+#~ msgstr "关闭电源(_D)"
 
-msgid "_Quit"
-msgstr "退出(_Q)"
+#~ msgid "_Quit"
+#~ msgstr "退出(_Q)"
 
-msgid "_Fullscreen"
-msgstr "全屏(_F)"
+#~ msgid "_Fullscreen"
+#~ msgstr "全屏(_F)"
 
-msgid "_Copy"
-msgstr "复制(_C)"
+#~ msgid "_Copy"
+#~ msgstr "复制(_C)"
 
-msgid "Zoom _In"
-msgstr "放大(_I)"
+#~ msgid "Zoom _In"
+#~ msgstr "放大(_I)"
 
-msgid "Zoom _Out"
-msgstr "缩小(_O)"
+#~ msgid "Zoom _Out"
+#~ msgstr "缩小(_O)"
 
-msgid "Best _Fit"
-msgstr "最合适大小(_F)"
+#~ msgid "Best _Fit"
+#~ msgstr "最合适大小(_F)"
 
-msgid "Zoom To _Fit"
-msgstr "缩放以适应大小(_F)"
+#~ msgid "Zoom To _Fit"
+#~ msgstr "缩放以适应大小(_F)"
 
-msgid "Grab On _Hover"
-msgstr "鼠标经过时捕获(_H)"
+#~ msgid "Grab On _Hover"
+#~ msgstr "鼠标经过时捕获(_H)"
 
-msgid "_Grab Input"
-msgstr "捕获输入(_G)"
+#~ msgid "_Grab Input"
+#~ msgstr "捕获输入(_G)"
 
-msgid "Show _Tabs"
-msgstr "显示标签页(_T)"
+#~ msgid "Show _Tabs"
+#~ msgstr "显示标签页(_T)"
 
-msgid "Detach Tab"
-msgstr "分离标签页"
+#~ msgid "Detach Tab"
+#~ msgstr "分离标签页"
 
-msgid "Show Menubar"
-msgstr "显示菜单栏"
+#~ msgid "Show Menubar"
+#~ msgstr "显示菜单栏"
 
-msgid "_Machine"
-msgstr "虚拟机(_M)"
+#~ msgid "_Machine"
+#~ msgstr "虚拟机(_M)"
 
-msgid "_View"
-msgstr "视图(_V)"
+#~ msgid "_View"
+#~ msgstr "视图(_V)"

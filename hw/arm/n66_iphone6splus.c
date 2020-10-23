@@ -37,6 +37,7 @@
 
 #include "hw/arm/exynos4210.h"
 #include "hw/arm/guest-services/general.h"
+#include "iphone_common.h"
 
 #define N66_SECURE_RAM_SIZE (0x100000)
 #define N66_PHYS_BASE (0x40000000)
@@ -214,7 +215,10 @@ static const ARMCPRegInfo n66_cp_reginfo_tcg[] = {
 
 static uint32_t g_nop_inst = NOP_INST;
 static uint32_t g_mov_w0_01_inst = MOV_W0_01_INST;
+#if defined (IOS_12_1)
 static uint32_t g_compare_true_inst = CMP_X9_x9_INST;
+static uint32_t g_qemu_call = 0xd51bff1f;
+#endif
 #if defined (IOS_12_1) || defined (IOS_13_3)
 static uint32_t g_wX_zero_inst = W7_ZERO_INST;
 #elif defined (IOS_12_2)
@@ -234,7 +238,6 @@ static uint32_t g_set_cpacr_and_branch_inst[] = {
 #endif
 };
 static uint32_t g_bzero_branch_unconditionally_inst = 0x14000039;
-static uint32_t g_qemu_call = 0xd51bff1f;
 
 static void n66_add_cpregs(N66MachineState *nms)
 {
@@ -543,7 +546,7 @@ static void n66_machine_init_hook_funcs(N66MachineState *nms,
         elem = pos;
         next_elem = memchr(elem, '@', len);
         if (NULL == next_elem) {
-            fprintf(stderr, "hook[%llu] failed to find '@' in %s\n", i, elem);
+            fprintf(stderr, "hook[%llu] failed to find '@' in %s\n", (ull_t)i, elem);
             abort();
         }
         elem_len = next_elem - elem;
@@ -553,14 +556,14 @@ static void n66_machine_init_hook_funcs(N66MachineState *nms,
         size_t size = 0;
         if (!g_file_get_contents(elem, (char **)&code, &size, NULL)) {
             fprintf(stderr, "hook[%llu] failed to read filepath: %s\n",
-                    i, elem);
+                    (ull_t)i, elem);
             abort();
         }
 
         elem += elem_len + 1;
         next_elem = memchr(elem, '@', len);
         if (NULL == next_elem) {
-            fprintf(stderr, "hook[%llu] failed to find '@' in %s\n", i, elem);
+            fprintf(stderr, "hook[%llu] failed to find '@' in %s\n", (ull_t)i, elem);
             abort();
         }
         elem_len = next_elem - elem;
@@ -600,7 +603,8 @@ static void n66_machine_init(MachineState *machine)
     MemoryRegion *secure_sysmem;
     AddressSpace *nsas;
     ARMCPU *cpu;
-    CPUState *cs;
+    // CPUState *cs = 0;
+
     DeviceState *cpudev;
 
     n66_cpu_setup(machine, &sysmem, &secure_sysmem, &cpu, &nsas);
@@ -610,7 +614,7 @@ static void n66_machine_init(MachineState *machine)
     n66_memory_setup(machine, sysmem, secure_sysmem, nsas);
 
     cpudev = DEVICE(cpu);
-    cs = CPU(cpu);
+    // cs = CPU(cpu);
     AllocatedData *allocated_data = (AllocatedData *)nms->extra_data_pa;
 
     if (0 != nms->driver_filename[0]) {

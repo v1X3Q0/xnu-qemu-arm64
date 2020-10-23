@@ -15,64 +15,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid " - Press Ctrl+Alt+G to release grab"
-msgstr " - Nyomj Ctrl+Alt+G-t a bemeneti eszközök elengedéséhez"
+#~ msgid " - Press Ctrl+Alt+G to release grab"
+#~ msgstr " - Nyomj Ctrl+Alt+G-t a bemeneti eszközök elengedéséhez"
 
-msgid " [Paused]"
-msgstr " [Megállítva]"
+#~ msgid " [Paused]"
+#~ msgstr " [Megállítva]"
 
-msgid "_Pause"
-msgstr "_Megállítás"
+#~ msgid "_Pause"
+#~ msgstr "_Megállítás"
 
-msgid "_Reset"
-msgstr "Új_raindítás"
+#~ msgid "_Reset"
+#~ msgstr "Új_raindítás"
 
-msgid "Power _Down"
-msgstr "_Leállítás"
-
-msgid "_Quit"
-msgstr ""
-
-msgid "_Fullscreen"
-msgstr ""
-
-msgid "_Copy"
-msgstr ""
+#~ msgid "Power _Down"
+#~ msgstr "_Leállítás"
 
 #, fuzzy
-msgid "Zoom _In"
-msgstr "Ablakmérethez _igazítás"
+#~ msgid "Zoom _In"
+#~ msgstr "Ablakmérethez _igazítás"
 
 #, fuzzy
-msgid "Zoom _Out"
-msgstr "Ablakmérethez _igazítás"
+#~ msgid "Zoom _Out"
+#~ msgstr "Ablakmérethez _igazítás"
 
-msgid "Best _Fit"
-msgstr ""
+#~ msgid "Zoom To _Fit"
+#~ msgstr "Ablakmérethez _igazítás"
 
-msgid "Zoom To _Fit"
-msgstr "Ablakmérethez _igazítás"
+#~ msgid "Grab On _Hover"
+#~ msgstr "Automatikus _elfogás"
 
-msgid "Grab On _Hover"
-msgstr "Automatikus _elfogás"
+#~ msgid "_Grab Input"
+#~ msgstr "_Bemeneti eszközök megragadása"
 
-msgid "_Grab Input"
-msgstr "_Bemeneti eszközök megragadása"
+#~ msgid "Show _Tabs"
+#~ msgstr "_Fülek megjelenítése"
 
-msgid "Show _Tabs"
-msgstr "_Fülek megjelenítése"
+#~ msgid "_Machine"
+#~ msgstr "_Gép"
 
-msgid "Detach Tab"
-msgstr ""
-
-msgid "Show Menubar"
-msgstr ""
-
-msgid "_Machine"
-msgstr "_Gép"
-
-msgid "_View"
-msgstr "_Nézet"
+#~ msgid "_View"
+#~ msgstr "_Nézet"
 
 #~ msgid "_File"
 #~ msgstr "_File"

@@ -17,59 +17,56 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.4\n"
 
-msgid " - Press Ctrl+Alt+G to release grab"
-msgstr "- Appuyer sur Ctrl+Alt+G pour arrêter la capture"
+#~ msgid " - Press Ctrl+Alt+G to release grab"
+#~ msgstr "- Appuyer sur Ctrl+Alt+G pour arrêter la capture"
 
-msgid " [Paused]"
-msgstr " [En pause]"
+#~ msgid " [Paused]"
+#~ msgstr " [En pause]"
 
-msgid "_Pause"
-msgstr "_Pause"
+#~ msgid "_Pause"
+#~ msgstr "_Pause"
 
-msgid "_Reset"
-msgstr "_Réinitialiser"
+#~ msgid "_Reset"
+#~ msgstr "_Réinitialiser"
 
-msgid "Power _Down"
-msgstr "_Éteindre"
+#~ msgid "Power _Down"
+#~ msgstr "_Éteindre"
 
-msgid "_Quit"
-msgstr "_Quitter"
+#~ msgid "_Quit"
+#~ msgstr "_Quitter"
 
-msgid "_Fullscreen"
-msgstr "Mode _plein écran"
+#~ msgid "_Fullscreen"
+#~ msgstr "Mode _plein écran"
 
-msgid "_Copy"
-msgstr "_Copier"
+#~ msgid "_Copy"
+#~ msgstr "_Copier"
 
-msgid "Zoom _In"
-msgstr "Zoom _avant"
+#~ msgid "Zoom _In"
+#~ msgstr "Zoom _avant"
 
-msgid "Zoom _Out"
-msgstr "_Zoom arrière"
+#~ msgid "Zoom _Out"
+#~ msgstr "_Zoom arrière"
 
-msgid "Best _Fit"
-msgstr "Zoom _idéal"
+#~ msgid "Best _Fit"
+#~ msgstr "Zoom _idéal"
 
-msgid "Zoom To _Fit"
-msgstr "Zoomer pour a_juster"
+#~ msgid "Zoom To _Fit"
+#~ msgstr "Zoomer pour a_juster"
 
-msgid "Grab On _Hover"
-msgstr "Capturer en _survolant"
+#~ msgid "Grab On _Hover"
+#~ msgstr "Capturer en _survolant"
 
-msgid "_Grab Input"
-msgstr "_Capturer les entrées"
+#~ msgid "_Grab Input"
+#~ msgstr "_Capturer les entrées"
 
-msgid "Show _Tabs"
-msgstr "Montrer les _onglets"
+#~ msgid "Show _Tabs"
+#~ msgstr "Montrer les _onglets"
 
-msgid "Detach Tab"
-msgstr "_Détacher l'onglet"
+#~ msgid "Detach Tab"
+#~ msgstr "_Détacher l'onglet"
 
-msgid "Show Menubar"
-msgstr ""
+#~ msgid "_Machine"
+#~ msgstr "_Machine"
 
-msgid "_Machine"
-msgstr "_Machine"
-
-msgid "_View"
-msgstr "_Vue"
+#~ msgid "_View"
+#~ msgstr "_Vue"

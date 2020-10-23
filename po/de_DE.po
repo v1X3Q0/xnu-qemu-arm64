@@ -16,59 +16,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-msgid " - Press Ctrl+Alt+G to release grab"
-msgstr " - Strg+Alt+G drücken, um Eingabegeräte freizugeben"
+#~ msgid " - Press Ctrl+Alt+G to release grab"
+#~ msgstr " - Strg+Alt+G drücken, um Eingabegeräte freizugeben"
 
-msgid " [Paused]"
-msgstr " [Angehalten]"
+#~ msgid " [Paused]"
+#~ msgstr " [Angehalten]"
 
-msgid "_Pause"
-msgstr "_Angehalten"
+#~ msgid "_Pause"
+#~ msgstr "_Angehalten"
 
-msgid "_Reset"
-msgstr "_Reset"
+#~ msgid "_Reset"
+#~ msgstr "_Reset"
 
-msgid "Power _Down"
-msgstr "_Herunterfahren"
+#~ msgid "Power _Down"
+#~ msgstr "_Herunterfahren"
 
-msgid "_Quit"
-msgstr "_Beenden"
+#~ msgid "_Quit"
+#~ msgstr "_Beenden"
 
-msgid "_Fullscreen"
-msgstr "_Vollbild"
+#~ msgid "_Fullscreen"
+#~ msgstr "_Vollbild"
 
-msgid "_Copy"
-msgstr "_Kopieren"
+#~ msgid "_Copy"
+#~ msgstr "_Kopieren"
 
-msgid "Zoom _In"
-msgstr "_Heranzoomen"
+#~ msgid "Zoom _In"
+#~ msgstr "_Heranzoomen"
 
-msgid "Zoom _Out"
-msgstr "_Wegzoomen"
+#~ msgid "Zoom _Out"
+#~ msgstr "_Wegzoomen"
 
-msgid "Best _Fit"
-msgstr "_Einpassen"
+#~ msgid "Best _Fit"
+#~ msgstr "_Einpassen"
 
-msgid "Zoom To _Fit"
-msgstr "Auf _Fenstergröße skalieren"
+#~ msgid "Zoom To _Fit"
+#~ msgstr "Auf _Fenstergröße skalieren"
 
-msgid "Grab On _Hover"
-msgstr "Tastatur _automatisch einfangen"
+#~ msgid "Grab On _Hover"
+#~ msgstr "Tastatur _automatisch einfangen"
 
-msgid "_Grab Input"
-msgstr "_Eingabegeräte einfangen"
+#~ msgid "_Grab Input"
+#~ msgstr "_Eingabegeräte einfangen"
 
-msgid "Show _Tabs"
-msgstr "Reiter anzeigen"
+#~ msgid "Show _Tabs"
+#~ msgstr "Reiter anzeigen"
 
-msgid "Detach Tab"
-msgstr "Reiter abtrennen"
+#~ msgid "Detach Tab"
+#~ msgstr "Reiter abtrennen"
 
-msgid "Show Menubar"
-msgstr ""
+#~ msgid "_Machine"
+#~ msgstr "_Maschine"
 
-msgid "_Machine"
-msgstr "_Maschine"
-
-msgid "_View"
-msgstr "_Ansicht"
+#~ msgid "_View"
+#~ msgstr "_Ansicht"

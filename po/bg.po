@@ -17,59 +17,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid " - Press Ctrl+Alt+G to release grab"
-msgstr " — натиснете Ctrl+Alt+G, за да освободите фокуса"
+#~ msgid " - Press Ctrl+Alt+G to release grab"
+#~ msgstr " — натиснете Ctrl+Alt+G, за да освободите фокуса"
 
-msgid " [Paused]"
-msgstr " [пауза]"
+#~ msgid " [Paused]"
+#~ msgstr " [пауза]"
 
-msgid "_Pause"
-msgstr "_Пауза"
+#~ msgid "_Pause"
+#~ msgstr "_Пауза"
 
-msgid "_Reset"
-msgstr "_Рестартиране"
+#~ msgid "_Reset"
+#~ msgstr "_Рестартиране"
 
-msgid "Power _Down"
-msgstr "_Изключване"
+#~ msgid "Power _Down"
+#~ msgstr "_Изключване"
 
-msgid "_Quit"
-msgstr "_Спиране на програмата"
+#~ msgid "_Quit"
+#~ msgstr "_Спиране на програмата"
 
-msgid "_Fullscreen"
-msgstr "На _цял екран"
+#~ msgid "_Fullscreen"
+#~ msgstr "На _цял екран"
 
-msgid "_Copy"
-msgstr "_Копиране"
+#~ msgid "_Copy"
+#~ msgstr "_Копиране"
 
-msgid "Zoom _In"
-msgstr "_Увеличаване"
+#~ msgid "Zoom _In"
+#~ msgstr "_Увеличаване"
 
-msgid "Zoom _Out"
-msgstr "_Намаляване"
+#~ msgid "Zoom _Out"
+#~ msgstr "_Намаляване"
 
-msgid "Best _Fit"
-msgstr "По_местване"
+#~ msgid "Best _Fit"
+#~ msgstr "По_местване"
 
-msgid "Zoom To _Fit"
-msgstr "Напас_ване"
+#~ msgid "Zoom To _Fit"
+#~ msgstr "Напас_ване"
 
-msgid "Grab On _Hover"
-msgstr "Прихващане при посо_чване"
+#~ msgid "Grab On _Hover"
+#~ msgstr "Прихващане при посо_чване"
 
-msgid "_Grab Input"
-msgstr "Прихващане на _фокуса"
+#~ msgid "_Grab Input"
+#~ msgstr "Прихващане на _фокуса"
 
-msgid "Show _Tabs"
-msgstr "Подпро_зорци"
+#~ msgid "Show _Tabs"
+#~ msgstr "Подпро_зорци"
 
-msgid "Detach Tab"
-msgstr "Към самостоятелен подпрозорец"
+#~ msgid "Detach Tab"
+#~ msgstr "Към самостоятелен подпрозорец"
 
-msgid "Show Menubar"
-msgstr "Лента за менюто"
+#~ msgid "Show Menubar"
+#~ msgstr "Лента за менюто"
 
-msgid "_Machine"
-msgstr "_Машина"
+#~ msgid "_Machine"
+#~ msgstr "_Машина"
 
-msgid "_View"
-msgstr "_Изглед"
+#~ msgid "_View"
+#~ msgstr "_Изглед"

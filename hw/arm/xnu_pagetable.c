@@ -45,6 +45,7 @@
 #include "exec/cpu_ldst.h"
 #include "arm_ldst.h"
 #include "hw/semihosting/semihost.h"
+#include "iphone_common.h"
 
 #define PHYS_ADDR_SIZE (40)
 #define TG_16K_SIZE (14)
@@ -117,7 +118,7 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
         uint64_t one_bits_verify = (1 << tcr_t1sz) - 1;
         //fprintf(stderr, "90 pt_tte_el1: te: 0x%016llx\n", te);
         if ((one_bits & one_bits_verify) != one_bits_verify) {
-            fprintf(stderr, "9 pt_tte_el1: te: 0x%016llx\n", te);
+            fprintf(stderr, "9 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
             abort();
         }
         tt = env->cp15.ttbr1_el[1];
@@ -127,7 +128,7 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
         uint64_t zero_bits = extract64(va, 64 - tcr_t0sz, tcr_t0sz);
         //fprintf(stderr, "91 pt_tte_el1: te: 0x%016lx\n", te);
         if (0 != zero_bits) {
-            fprintf(stderr, "10 pt_tte_el1: te: 0x%016llx\n", te);
+            fprintf(stderr, "10 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
             abort();
         }
         tt = env->cp15.ttbr0_el[1];
@@ -137,14 +138,14 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
 
     //currently only support parsing 16kg granule page tables
     if (TG_16KB != tg) {
-        fprintf(stderr, "8 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "8 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
     //currently only support level 1 base entries
     if ((tsz < (64 - TG_16KB_LEVEL0_INDEX)) ||
         (tsz >= (64 - TG_16KB_LEVEL1_INDEX))) {
-        fprintf(stderr, "7 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "7 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
@@ -156,14 +157,14 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
     address_space_rw(as, (tt + (sizeof(hwaddr) * l1_idx)),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&te, sizeof(te), 0);
     if (0 == te) {
-        fprintf(stderr, "6 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "6 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
     uint64_t te_type = extract64(te, TE_TYPE_INDEX, TE_TYPE_SIZE);
     //currently only support table description level1 entries
     if (TE_TYPE_TABLE_DESC != te_type) {
-        fprintf(stderr, "5 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "5 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
@@ -172,14 +173,14 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
     address_space_rw(as, (tt + (sizeof(hwaddr) * l2_idx)),
                      MEMTXATTRS_UNSPECIFIED, (uint8_t *)&te, sizeof(te), 0);
     if (0 == te) {
-        fprintf(stderr, "4 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "4 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
     te_type = extract64(te, TE_TYPE_INDEX, TE_TYPE_SIZE);
     //currently only support table description level2 entries
     if (TE_TYPE_TABLE_DESC != te_type) {
-        fprintf(stderr, "3 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "3 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
@@ -189,14 +190,14 @@ hwaddr pt_tte_el1(ARMCPU *cpu, AddressSpace *as, hwaddr va, bool make_exe)
     address_space_rw(as, l3_te_addr, MEMTXATTRS_UNSPECIFIED, (uint8_t *)&te,
                      sizeof(te), 0);
     if (0 == te) {
-        fprintf(stderr, "2 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "2 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
     te_type = extract64(te, TE_TYPE_INDEX, TE_TYPE_SIZE);
     //sanity - l3 entries can only be block entries or invalid entries
     if (TE_TYPE_L3_BLOCK != te_type) {
-        fprintf(stderr, "1 pt_tte_el1: te: 0x%016llx\n", te);
+        fprintf(stderr, "1 pt_tte_el1: te: 0x%016llx\n", (ull_t)te);
         abort();
     }
 
